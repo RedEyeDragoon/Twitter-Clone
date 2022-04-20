@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Clone</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" 
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" 
+    integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+    <script src="Firebase.js"></script>
+    <script src="User.js"></script>
+    <script src="UserDB.js"></script>
+    <script src="Tweet.js"></script>
+    <script src="TweetDB.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="page-header">
+                    <h1>Welcome to Fake Twitter</h1>
+                    <img class="img-thumbnail" src="https://bucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com/public/images/ee1c6457-4bbc-41b0-8847-3906c27b8599_960x540.jpeg" alt="">
+                </div>
+                <div class="nav-bar">
+                    <nav class="nav-flex-column">
+                        <a class="nav-link active" href="#">Home</a>
+                        <a class="nav-link" href="#">This</a>
+                        <a class="nav-link" href="#">Doesnt</a>
+                        <a class="nav-link" href="#">Work</a>
+                        <a class="nav-link" href="#">Just</a>
+                        <a class="nav-link" href="#">For</a>
+                        <a class="nav-link" href="#">Show</a>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="create-tweet after-log-in">
+                    <form>
+                        <div class="form-group">
+                            <label for="createTweet">What would you like to tweet?</label>
+                            <input type="text" class="form-control" id="createTweet" placeholder="Sing away little bird">
+                            <button type="button" class="btn btn-primary" onclick="makeTweet()">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="tweetDisplay">
+                    
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="d-flex flex-row-reverse before-log-in">
+                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#signUp">Sign Up</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#logIn">Log In</button>
+                </div>
+                <div class="d-flex flex-row-reverse after-log-in">
+                    <button onclick="logOut()" type="button" class="btn btn-primary">Log Out</button>
+                </div>
+                <nav class="navbar navbar-light justify-content-around">
+                    <form class="form-inline">
+                      <input class="form-control mr-sm-1" type="search" placeholder="Doesnt Work" aria-label="Search">
+                      <button class="btn btn-outline-success btn-small" type="button">Search</button>
+                    </form>
+                  </nav>
+                <div class="trending">
+                    <div class="trending-container">
+                        <div class="trending-header">
+                            Popular Tweet Topics
+                        </div>
+                    </div>
+                    <div class="trending-container">
+                        <div class="trending-header">
+                            Insane Tweets?
+                        </div>
+                        <div class="trending-content">
+                            Tweets these days so crazy you would swear they were <a href='#'>fake</a>!
+                        </div>
+                    </div>
+                    <div class="trending-container">
+                        <div class="trending-header">
+                            Router Problems?
+                        </div>
+                        <div class="trending-content">
+                            Is your laptop constantly disconnecting from the internet? Check <a href='#'>here</a> for 5 easy tips to prevent this. 
+                        </div>
+                    </div>
+                    <div class="trending-container">
+                        <div class="trending-header">
+                            This site doesnt look like twitter?
+                        </div>
+                        <div class="trending-content">
+                            Thats because the dev doesnt actually use twitter and has no idea what it really looks like. Who doesnt use <a href='#'>twitter</a> these days?
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+
+
+    <div class="modal" id="signUp" tab-index="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="documnet">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sign Up</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close"></button>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="signUpFirst">First Name</label>
+                            <input type="text" class="form-control" id="signUpFirst" placeholder="First Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="signUpLast">Last Name</label>
+                            <input type="text" class="form-control" id="signUpLast" placeholder="Last Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="signUpUser">Username</label>
+                            <input type="text" class="form-control" id="signUpUser" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <label for="signUpPass">Password</label>
+                            <input type="password" class="form-control" id="signUpPass" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="signUp()">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="logIn" tab-index="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="documnet">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Log In</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close"></button>
+                </div>
+               <form>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="logInUser">Username</label>
+                        <input type="text" class="form-control" id="logInUser" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <label for="logInPass">Password</label>
+                        <input type="password" class="form-control" id="logInPass" placeholder="Password">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="logIn()">Submit</button>
+                </div>
+               </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="editTweet" tab-index="1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Tweet</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close"></button>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="tweetEdit">Edit Tweet</label>
+                            <input type="text" class="form-control" id="tweetEdit">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="editTweetButton" type="button" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
